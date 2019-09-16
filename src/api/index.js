@@ -1,6 +1,9 @@
 import { Router } from 'express'
+import death from './death'
 
 const router = new Router()
+
+router.use('/deaths', death)
 
 /**
  * @apiDefine master Master access only
