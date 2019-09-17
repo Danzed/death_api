@@ -5,7 +5,22 @@ export const create = ({ bodymen: { body } }, res, next) =>
   Death.create(body)
     .then((death) => death.view(true))
     .then(success(res, 201))
-    .catch(next)
+    .catch((err) => {
+      /* istanbul ignore else */
+      if (err.name === 'MongoError' && err.code === 11000) {
+        res.status(409).json({
+          valid: false,
+          message: 'Do you already have a reserved time? If you don\'t have a reserved, try another time'
+        })
+      } else {
+        res.status(500).json({
+          valid: false,
+          message: 'Error desconocido.',
+          interno: err
+        })
+        // next(err)
+      }
+    })
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Death.count(query)

@@ -6,21 +6,21 @@ import { schema } from './model'
 export Death, { schema } from './model'
 
 const router = new Router()
-const { date, hours, user } = schema.tree
+const { title, start, timestamps } = schema.tree
 
 /**
  * @api {post} /deaths Create death
  * @apiName CreateDeath
  * @apiGroup Death
- * @apiParam date Death's date.
- * @apiParam hours Death's hours.
- * @apiParam user Death's user.
+ * @apiParam title Death's title.
+ * @apiParam start Death's start.
+ * @apiParam timestamps Death's timestamps.
  * @apiSuccess {Object} death Death's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Death not found.
  */
 router.post('/',
-  body({ date, hours, user }),
+  body({ title, start, timestamps }),
   create)
 
 /**
@@ -51,15 +51,15 @@ router.get('/:id',
  * @api {put} /deaths/:id Update death
  * @apiName UpdateDeath
  * @apiGroup Death
- * @apiParam date Death's date.
- * @apiParam hours Death's hours.
- * @apiParam user Death's user.
+ * @apiParam title Death's title.
+ * @apiParam start Death's start.
+ * @apiParam timestamps Death's timestamps.
  * @apiSuccess {Object} death Death's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Death not found.
  */
 router.put('/:id',
-  body({ date, hours, user }),
+  body({ title, start, timestamps }),
   update)
 
 /**

@@ -1,14 +1,20 @@
 import mongoose, { Schema } from 'mongoose'
 
 const deathSchema = new Schema({
-  date: {
-    type: String
+  title: {
+    type: String,
+    unique: true,
+    required: true,
+    index: true
   },
-  hours: {
-    type: String
+  start: {
+    type: Date
   },
-  user: {
-    type: String
+  timestamps: {
+    type: Number,
+    unique: true,
+    required: true,
+    index: true
   }
 }, {
   timestamps: true,
@@ -23,9 +29,9 @@ deathSchema.methods = {
     const view = {
       // simple view
       id: this.id,
-      date: this.date,
-      hours: this.hours,
-      user: this.user,
+      title: this.title,
+      start: this.start,
+      timestamps: this.timestamps,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
